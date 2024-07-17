@@ -1,0 +1,19 @@
+ # Node modules
+ node_modules/
+
+ # TypeScript build output
+ dist/
+
+ # Docker
+ .dockerignore
+ .docker/
+
+ # Drizzle build output
+ build/
+
+ # IDE files
+ .vscode/
+ .idea/
+
+ # Logs
+ *.log
