@@ -19,7 +19,11 @@
     "typescript": "^5.5.3"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "drizzle-orm": "^0.32.0",
-    "postgres": "^3.4.4"
+    "express": "^4.19.2",
+    "faker": "^6.6.6",
+    "postgres": "^3.4.4",
+    "supertest": "^7.0.0"
   }
 }
