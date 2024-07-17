@@ -3,7 +3,8 @@
 
  # TypeScript build output
  dist/
-
+ data/
+ pgadmin/
  # Docker
  .dockerignore
  .docker/
