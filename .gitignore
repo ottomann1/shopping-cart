@@ -1,20 +1,14 @@
- # Node modules
- node_modules/
+node_modules/
 
- # TypeScript build output
- dist/
- data/
- pgadmin/
- # Docker
- .dockerignore
- .docker/
+dist/
+data/
+pgadmin/
+.dockerignore
+.docker/
 
- # Drizzle build output
- build/
+build/
 
- # IDE files
- .vscode/
- .idea/
+.vscode/
+.idea/
 
- # Logs
- *.log
+*.log
