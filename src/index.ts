@@ -17,6 +17,13 @@ app.post("/api/carts/", async (req, res)=>{
   res.send("hello world")
 })
 
+app.get('/api/carts/:id/', async(req, res) => {
+  console.log('line 21');
+  
+  const cart = await db.select().from(carts).where(carts.cartid.eq(req.params.id)).execute()
+
+  res.json(cart)
+})
 
 
 app.listen(port,() =>{
