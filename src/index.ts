@@ -52,6 +52,9 @@ app.post("/api/carts/:cartId/products/", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+app.delete("/api/carts/:cartId", async (req, res) => {
+  await db.delete(cart).where(eq(cart.cartId, req.params.cartId));
+});
 
 app.listen(port, () => {
   console.log(`App listening on ${port}`);
