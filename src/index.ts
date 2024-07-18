@@ -9,13 +9,10 @@ const port = 3000;
 app.post("/api/carts/", async (req, res) => {
   console.log("line 9");
 
-  await db
-    .insert(cart)
-    .values({
-      totalPrice: 0,
-    })
-    .execute();
-  res.send("hello world");
+  const newCart = await db
+    .insert(cart).values({totalPrice: 0}).returning();
+  console.log(newCart)
+  res.json(newCart);
 });
 
 app.get("/api/carts/:id/", async (req, res) => {
