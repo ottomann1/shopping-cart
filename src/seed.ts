@@ -11,14 +11,15 @@ async function createRandomCart() {
     })
     .execute();
 }
+
 async function createRandomproduct() {
   await db.insert(product).values({
     name: faker.commerce.product(),
-    price: faker.commerce.price({ min: 0.5, max: 250 }),
+    price: Number(faker.commerce.price({ min: 0.5, max: 250 })),
   });
 }
 
-async function seedData() {
+export function seedData() {
   for (let i = 0; i < 3; i++) {
     createRandomCart();
   }

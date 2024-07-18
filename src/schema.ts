@@ -24,7 +24,7 @@ export const cartsRelations = relations(cart, ({ many }) => ({
 export const product = pgTable("product", {
   productId: uuid("product_id").primaryKey().defaultRandom(),
   name: text("name").notNull(),
-  price: real("price").notNull(),
+  price: real("price").notNull().default(0.0),
 });
 
 export const productRelations = relations(product, ({ many }) => ({
