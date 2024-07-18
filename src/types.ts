@@ -1,6 +1,18 @@
-import { InferModel } from 'drizzle-orm';
-import { carts, products, cartsToProducts } from '../features/carts/cart.schema';
+export type Cart = {
+  cartId: string;
+  totalNumberOfItems: number;
+  totalPrice: number;
+};
 
-export type Cart = InferModel<typeof carts>;
-export type Product = InferModel<typeof products>;
-export type CartProduct = InferModel<typeof cartsToProducts>;
+export type Product = {
+  productId: string;
+  name: string;
+  price: number;
+};
+
+export type CartProduct = {
+  id: string;
+  cartId: string;
+  productId: string;
+  quantity: number;
+};
