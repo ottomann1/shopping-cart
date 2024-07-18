@@ -10,7 +10,18 @@ const port = 3000;
 
 app.use(express.json());
 
-seedData();
+async function faker(){
+  const products = await db.select().from(product)
+if (!products){
+  console.log("new");
+  
+  seedData()
+}else{
+  console.log("old");
+  
+}
+}
+faker()
 
 app.post("/api/carts/", async (req, res) => {
   console.log("line 9");

@@ -43,6 +43,13 @@
       "when": 1721311155551,
       "tag": "0005_adorable_shard",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1721312074033,
+      "tag": "0006_shallow_shooting_star",
+      "breakpoints": true
     }
   ]
 }

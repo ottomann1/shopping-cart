@@ -1,6 +1,6 @@
 {
-  "id": "1b121adc-9a7b-4c4e-8a7a-ed9dcb002381",
-  "prevId": "518292dd-5596-40ba-b2f0-37ff4ebe0d8e",
+  "id": "23e781d3-7779-4fb0-89fc-6a59b6061512",
+  "prevId": "1b121adc-9a7b-4c4e-8a7a-ed9dcb002381",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -77,7 +77,7 @@
           "columnsTo": [
             "cart_id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "cartproducts_product_id_product_product_id_fk": {
@@ -90,7 +90,7 @@
           "columnsTo": [
             "product_id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
