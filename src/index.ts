@@ -8,6 +8,8 @@ import { CartProduct } from "./types";
 const app = express();
 const port = 3000;
 
+app.use(express.json());
+
 seedData();
 
 app.post("/api/carts/", async (req, res) => {
@@ -31,19 +33,22 @@ app.get("/api/carts/:id/", async (req, res) => {
 });
 
 app.post("/api/carts/:cartId/products/", async (req, res) => {
-  console.log(req);
-  
-  const { cartId } = req.params;
-  const { productId, quantity } = req.body;
+  try {
+    const newBody = req.body
+    const { cartId } = req.params;
+    const newCartProduct = await db
+      .insert(productToCart)
+      .values({ cartId: cartId, productId: newBody.productId, quantity: newBody.quantity })
+      .returning();
+    console.log(newCartProduct);
 
-  const newCartProduct = await db
-    .insert(productToCart)
-    .values({ cartId: cartId, productId: productId, quantity: quantity })
-    .returning();
-  console.log(newCartProduct);
-  
     res.json(newCartProduct);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
+
 app.listen(port, () => {
   console.log(`App listening on ${port}`);
 });
