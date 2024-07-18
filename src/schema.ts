@@ -9,8 +9,6 @@ import {
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
-
-
 export const cart = pgTable("cart", {
   cartId: uuid("cart_id").primaryKey().defaultRandom(),
   totalNumberOfItems: integer("total_number_of_items").default(0),
@@ -18,7 +16,7 @@ export const cart = pgTable("cart", {
 });
 
 export const cartsRelations = relations(cart, ({ many }) => ({
-  cartsToProducts: many(productToCart),
+  cartsToProducts: many(cartproducts),
 }));
 
 export const product = pgTable("product", {
@@ -28,10 +26,10 @@ export const product = pgTable("product", {
 });
 
 export const productRelations = relations(product, ({ many }) => ({
-  productToCart: many(productToCart),
+  cartproducts: many(cartproducts),
 }));
 
-export const productToCart = pgTable("productToCart", {
+export const cartproducts = pgTable("cartproducts", {
   id: uuid("id").primaryKey().defaultRandom(),
   cartId: uuid("cart_id")
     .notNull()
@@ -42,13 +40,13 @@ export const productToCart = pgTable("productToCart", {
   quantity: integer("quantity").notNull(),
 });
 
-export const productToCartRelations = relations(productToCart, ({ one }) => ({
+export const cartproductsRelations = relations(cartproducts, ({ one }) => ({
   product: one(product, {
-    fields: [productToCart.productId],
+    fields: [cartproducts.productId],
     references: [product.productId],
   }),
   cart: one(cart, {
-    fields: [productToCart.cartId],
+    fields: [cartproducts.cartId],
     references: [cart.cartId],
   }),
 }));

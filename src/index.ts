@@ -1,5 +1,5 @@
 import db from "./db";
-import { cart, product, productToCart } from "./schema";
+import { cart, product, cartproducts } from "./schema";
 import express from "express";
 import { eq } from "drizzle-orm";
 import { seedData } from "./seed";
@@ -34,18 +34,22 @@ app.get("/api/carts/:id/", async (req, res) => {
 
 app.post("/api/carts/:cartId/products/", async (req, res) => {
   try {
-    const newBody = req.body
+    const newBody = req.body;
     const { cartId } = req.params;
     const newCartProduct = await db
-      .insert(productToCart)
-      .values({ cartId: cartId, productId: newBody.productId, quantity: newBody.quantity })
+      .insert(cartproducts)
+      .values({
+        cartId: cartId,
+        productId: newBody.productId,
+        quantity: newBody.quantity,
+      })
       .returning();
     console.log(newCartProduct);
 
     res.json(newCartProduct);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
