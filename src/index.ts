@@ -39,8 +39,6 @@ app.post("/api/carts/:cartId/products/", async (req, res) => {
     .from(carts)
     .where(eq(carts.cartid, cartId))
     .execute();
-
-    const product = 
 });
 app.listen(port, () => {
   console.log(`App listening on ${port}`);
