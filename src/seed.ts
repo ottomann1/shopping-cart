@@ -1,23 +1,30 @@
 import db from "./db";
 import { faker } from "@faker-js/faker";
 import { CartProduct, Cart, Product } from "./types";
+import { cart, product, productToCart } from "./schema";
 
-function createRandomCart(): Cart {
-  return {
-    cartid: faker.string.uuid(),
-  };
+async function createRandomCart() {
+  await db
+    .insert(cart)
+    .values({
+      totalNumberOfItems: 0,
+    })
+    .execute();
 }
-function createRandomproduct(): Product {
-  return {
-    productId: faker.string.uuid(),
+async function createRandomproduct() {
+  await db.insert(product).values({
     name: faker.commerce.product(),
-    price: faker.commerce.price({ min: 10, max: 250 }),
-  };
+    price: faker.commerce.price({ min: 0.5, max: 250 }),
+  });
 }
 
 async function seedData() {
-  createRandomCart();
-  createRandomproduct();
+  for (let i = 0; i < 3; i++) {
+    createRandomCart();
+  }
+  for (let i = 0; i < 10; i++) {
+    createRandomproduct();
+  }
 }
 
 seedData();
