@@ -1,6 +1,6 @@
 {
-  "id": "0c234f72-2a56-4a4f-9b0d-fd75651116b1",
-  "prevId": "90d39cee-efd3-4990-bb7f-f9dcc59125e8",
+  "id": "1b121adc-9a7b-4c4e-8a7a-ed9dcb002381",
+  "prevId": "518292dd-5596-40ba-b2f0-37ff4ebe0d8e",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -71,8 +71,12 @@
           "name": "cartproducts_cart_id_cart_cart_id_fk",
           "tableFrom": "cartproducts",
           "tableTo": "cart",
-          "columnsFrom": ["cart_id"],
-          "columnsTo": ["cart_id"],
+          "columnsFrom": [
+            "cart_id"
+          ],
+          "columnsTo": [
+            "cart_id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -80,8 +84,12 @@
           "name": "cartproducts_product_id_product_product_id_fk",
           "tableFrom": "cartproducts",
           "tableTo": "product",
-          "columnsFrom": ["product_id"],
-          "columnsTo": ["product_id"],
+          "columnsFrom": [
+            "product_id"
+          ],
+          "columnsTo": [
+            "product_id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
