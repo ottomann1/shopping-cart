@@ -1,7 +1,6 @@
 import db from "./db";
-import { carts, products, productsInCart } from "./schema";
+import { carts, products, cartsToProducts } from "./schema";
 import { faker } from "@faker-js/faker";
-import { eq, sql } from "drizzle-orm";
 
 async function seedData() {
   try {
@@ -12,7 +11,7 @@ async function seedData() {
         .insert(products)
         .values({
           name: faker.commerce.productName(),
-          price: sql`${faker.number.float({ min: 1, max: 100, precision: 0.01 })}`, // Use SQL placeholder
+          price: faker.number.float({ min: 1, max: 100, precision: 0.01 }), // Ensures price is a float
         })
         .returning({ productId: products.productId })
         .execute();
@@ -27,7 +26,7 @@ async function seedData() {
         .insert(carts)
         .values({
           totalNumberOfItems: 0,
-          totalPrice: sql`${0.0}`, // Use SQL placeholder
+          totalPrice: 0.0, // Initialize as a float
         })
         .returning({ cartid: carts.cartid })
         .execute();
@@ -42,10 +41,10 @@ async function seedData() {
 
       for (let j = 0; j < 3; j++) {
         const productId = faker.helpers.arrayElement(productIds);
-        const quantity = faker.datatype.number({ min: 1, max: 10 });
+        const quantity = faker.number.int({ min: 1, max: 10 }); // Ensures quantity is an integer
 
         await db
-          .insert(productsInCart)
+          .insert(cartsToProducts)
           .values({
             cartID: cartId,
             productsId: productId,
@@ -61,9 +60,8 @@ async function seedData() {
           .execute();
 
         if (product.length > 0) {
-          const price = parseFloat(product[0].price as unknown as string); // Ensure price is treated as a float
           totalNumberOfItems += quantity;
-          totalPrice += price * quantity;
+          totalPrice += product[0].price * quantity;
         }
       }
 
@@ -72,7 +70,7 @@ async function seedData() {
         .update(carts)
         .set({
           totalNumberOfItems,
-          totalPrice: sql`${totalPrice}`, // Use SQL placeholder
+          totalPrice, // Ensure totalPrice is a float
         })
         .where(eq(carts.cartid, cartId))
         .execute();

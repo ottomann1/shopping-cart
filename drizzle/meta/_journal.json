@@ -15,6 +15,13 @@
       "when": 1721216374526,
       "tag": "0001_huge_sentinel",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1721224047758,
+      "tag": "0002_funny_black_queen",
+      "breakpoints": true
     }
   ]
 }
