@@ -23,7 +23,6 @@ async function faker() {
   }
 }
 faker();
-
 app.post("/api/carts/", async (req, res) => {
   console.log("line 9");
 
