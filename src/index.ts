@@ -4,24 +4,25 @@ import express from "express";
 import { eq } from "drizzle-orm";
 import { seedData } from "./seed";
 import { CartProduct } from "./types";
+import { debug } from "console";
+debug("Debug message before server starts");
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 
-async function faker(){
-  const products = await db.select().from(product)
-if (!products){
-  console.log("new");
-  
-  seedData()
-}else{
-  console.log("old");
-  
+async function faker() {
+  const products = await db.select().from(product);
+  if (!products) {
+    console.log("new");
+
+    seedData();
+  } else {
+    console.log("old");
+  }
 }
-}
-faker()
+faker();
 
 app.post("/api/carts/", async (req, res) => {
   console.log("line 9");
@@ -70,6 +71,17 @@ app.delete("/api/carts/:cartId", async (req, res) => {
   res.json(deleted);
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`App listening on ${port}`);
 });
+
+const gracefulShutdown = (signal) => {
+  console.log(`${signal} signal received: closing HTTP server`);
+  server.close(() => {
+    console.log("HTTP server closed");
+    process.exit(0);
+  });
+};
+
+process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
+process.on("SIGINT", () => gracefulShutdown("SIGINT"));
