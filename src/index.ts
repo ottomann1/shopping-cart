@@ -3,8 +3,8 @@ import express from "express";
 import { eq } from "drizzle-orm";
 import { seedData } from "./seed";
 import { debug } from "console";
-import { product, productRouter } from "./features/product";
-import { cartRouter } from "./features/cart";
+import { product, productRouter } from "./features/product/index";
+import { cartRouter } from "./features/cart/index";
 
 debug("Debug message before server starts");
 

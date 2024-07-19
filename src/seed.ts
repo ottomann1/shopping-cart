@@ -1,12 +1,7 @@
 import { db } from "./db";
 import { faker } from "@faker-js/faker";
-import {
-  CartProduct,
-  Cart,
-  cartproducts,
-  cart,
-} from "./src/features/cart/index";
-import { product, Product } from "./src/features/product/index";
+import { cart } from "./features/cart/index";
+import { product } from "./features/product/index";
 
 async function createRandomCart() {
   await db

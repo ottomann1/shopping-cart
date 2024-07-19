@@ -30,7 +30,7 @@ cartRouter.delete("/:id", async (req, res) => {
   res.json(deletedCart);
 });
 
-cartRouter.post("/api/carts/:id/products/", async (req, res) => {
+cartRouter.post("/:id/products/", async (req, res) => {
   const newBody = req.body;
   const { id } = req.params;
   const newCartProduct = await postProducts(newBody, id);
