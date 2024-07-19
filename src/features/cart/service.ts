@@ -16,3 +16,11 @@ export async function getCart(id: string) {
     .execute();
   return newCart;
 }
+
+export async function deleteCart(id: string) {
+  const cartToDelete = await db
+    .delete(cart)
+    .where(eq(cart.cartId, id))
+    .returning();
+  return cartToDelete;
+}
