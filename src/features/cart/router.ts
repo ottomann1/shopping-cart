@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { getCart, createCart } from "./service";
 
-const cartRouter = Router();
+export const cartRouter = Router();
 
 cartRouter.post("/", async (req, res) => {
   try {
@@ -23,5 +23,3 @@ cartRouter.get("/:id/", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
-export default cartRouter;

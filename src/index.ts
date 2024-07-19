@@ -1,11 +1,11 @@
 import { client, db } from "./db";
-import { cart, product, cartproducts } from "./schema";
+import { cart, cartproducts } from "./features/cart/index";
 import express from "express";
 import { eq } from "drizzle-orm";
 import { seedData } from "./seed";
-import { CartProduct } from "./types";
+import { CartProduct } from "./features/cart/index";
 import { debug } from "console";
-import cartRouter from "./features/cart/router";
+import { cartRouter } from "./features/cart/index";
 
 debug("Debug message before server starts");
 

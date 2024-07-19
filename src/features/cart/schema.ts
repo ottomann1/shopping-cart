@@ -8,6 +8,7 @@ import {
   real,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
+import { product } from "../product/schema";
 
 export const cart = pgTable("cart", {
   cartId: uuid("cart_id").primaryKey().defaultRandom(),
@@ -19,24 +20,14 @@ export const cartsRelations = relations(cart, ({ many }) => ({
   cartsToProducts: many(cartproducts),
 }));
 
-export const product = pgTable("product", {
-  productId: uuid("product_id").primaryKey().defaultRandom(),
-  name: text("name").notNull(),
-  price: real("price").notNull().default(0.0),
-});
-
-export const productRelations = relations(product, ({ many }) => ({
-  cartproducts: many(cartproducts),
-}));
-
 export const cartproducts = pgTable("cartproducts", {
   id: uuid("id").primaryKey().defaultRandom(),
   cartId: uuid("cart_id")
     .notNull()
-    .references(() => cart.cartId, { onDelete: "cascade" }),
+    .references(() => cart.cartId, {onDelete: 'cascade'}),
   productId: uuid("product_id")
     .notNull()
-    .references(() => product.productId, { onDelete: "cascade" }),
+    .references(() => product.productId, {onDelete: 'cascade'}),
   quantity: integer("quantity").notNull(),
 });
 
