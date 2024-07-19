@@ -1,4 +1,4 @@
-import db from "./db";
+import { db } from "./db";
 import { faker } from "@faker-js/faker";
 import { CartProduct, Cart, Product } from "./types";
 import { cart, product, cartproducts } from "./schema";

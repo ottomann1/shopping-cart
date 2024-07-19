@@ -1,4 +1,4 @@
-import db from "./db";
+import { client, db } from "./db";
 import { cart, product, cartproducts } from "./schema";
 import express from "express";
 import { eq } from "drizzle-orm";
@@ -80,7 +80,9 @@ const gracefulShutdown = (signal) => {
   console.log(`${signal} signal received: closing HTTP server`);
   server.close(() => {
     console.log("HTTP server closed");
-    process.exit(0);
+    client.end().then(() => {
+      console.log("DB connection closed (?)");
+    });
   });
 };
 
