@@ -73,6 +73,7 @@ app.delete("/api/carts/:cartId", async (req, res) => {
 
 const server = app.listen(port, () => {
   console.log(`App listening on ${port}`);
+  console.log(`Process ID: ${process.pid}`);
 });
 
 const gracefulShutdown = (signal) => {
