@@ -8,7 +8,7 @@ import {
   real,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import { cartproducts } from "../cart/schema";
+import { cartproducts } from "../cart/";
 
 export const product = pgTable("product", {
   productId: uuid("product_id").primaryKey().defaultRandom(),

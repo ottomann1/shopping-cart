@@ -1,5 +1,5 @@
 import { db } from "../../db";
-import { cart } from "../../schema";
+import { cart, CartProduct, cartproducts } from "./";
 import { eq } from "drizzle-orm";
 
 export async function createCart() {
@@ -23,4 +23,21 @@ export async function deleteCart(id: string) {
     .where(eq(cart.cartId, id))
     .returning();
   return cartToDelete;
+}
+
+export async function postProducts(newBody: CartProduct, cartId: string) {
+  try {
+    const newCartProduct = await db
+      .insert(cartproducts)
+      .values({
+        cartId: cartId,
+        productId: newBody.productId,
+        quantity: newBody.quantity,
+      })
+      .returning();
+    console.log(newCartProduct);
+    return newCartProduct;
+  } catch (error) {
+    console.error(error);
+  }
 }

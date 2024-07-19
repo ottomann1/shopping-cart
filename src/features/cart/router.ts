@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getCart, createCart } from "./service";
+import { getCart, createCart, deleteCart, postProducts } from "./";
 
 export const cartRouter = Router();
 
@@ -22,4 +22,18 @@ cartRouter.get("/:id/", async (req, res) => {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
+});
+
+cartRouter.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+  const deletedCart = await deleteCart(id);
+  res.json(deletedCart);
+});
+
+cartRouter.post("/api/carts/:id/products/", async (req, res) => {
+  const newBody = req.body;
+  const { id } = req.params;
+  const newCartProduct = await postProducts(newBody, id);
+  console.log(newCartProduct);
+  res.json(newCartProduct);
 });
