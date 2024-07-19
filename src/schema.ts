@@ -33,10 +33,10 @@ export const cartproducts = pgTable("cartproducts", {
   id: uuid("id").primaryKey().defaultRandom(),
   cartId: uuid("cart_id")
     .notNull()
-    .references(() => cart.cartId, {onDelete: 'cascade'}),
+    .references(() => cart.cartId, { onDelete: "cascade" }),
   productId: uuid("product_id")
     .notNull()
-    .references(() => product.productId, {onDelete: 'cascade'}),
+    .references(() => product.productId, { onDelete: "cascade" }),
   quantity: integer("quantity").notNull(),
 });
 
