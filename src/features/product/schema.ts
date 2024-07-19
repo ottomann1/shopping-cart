@@ -8,14 +8,14 @@ import {
   real,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import { cartproducts } from "../cart/";
+import { cartproductsTable } from "../cart/";
 
-export const product = pgTable("product", {
+export const productTable = pgTable("product", {
   productId: uuid("product_id").primaryKey().defaultRandom(),
   name: text("name").notNull(),
   price: real("price").notNull().default(0.0),
 });
 
-export const productRelations = relations(product, ({ many }) => ({
-  cartproducts: many(cartproducts),
+export const productRelations = relations(productTable, ({ many }) => ({
+  cartproducts: many(cartproductsTable),
 }));

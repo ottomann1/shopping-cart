@@ -3,7 +3,7 @@ import express from "express";
 import { eq } from "drizzle-orm";
 import { seedData } from "./seed";
 import { debug } from "console";
-import { product, productRouter } from "./features/product/index";
+import { productTable, productRouter } from "./features/product/index";
 import { cartRouter } from "./features/cart/index";
 
 debug("Debug message before server starts");
@@ -14,7 +14,7 @@ const port = 3000;
 app.use(express.json());
 
 async function faker() {
-  const products = await db.select().from(product);
+  const products = await db.select().from(productTable);
   if (!products) {
     console.log("new");
 

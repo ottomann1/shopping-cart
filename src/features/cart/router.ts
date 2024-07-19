@@ -1,5 +1,12 @@
 import { Router } from "express";
-import { getCart, createCart, deleteCart, postProducts } from "./";
+import {
+  getCart,
+  createCart,
+  deleteCart,
+  postProducts,
+  calculateCart,
+  CartProduct,
+} from "./";
 
 export const cartRouter = Router();
 
@@ -34,6 +41,11 @@ cartRouter.post("/:id/products/", async (req, res) => {
   const newBody = req.body;
   const { id } = req.params;
   const newCartProduct = await postProducts(newBody, id);
-  console.log(newCartProduct);
-  res.json(newCartProduct);
+  console.log("line 44 ", newCartProduct);
+  if (!newCartProduct) {
+    throw new Error("erroooor");
+  }
+  const newNew: CartProduct = newCartProduct;
+  const result = calculateCart(newCartProduct);
+  res.json(result);
 });
