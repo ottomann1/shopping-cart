@@ -5,6 +5,8 @@ import { eq } from "drizzle-orm";
 import { seedData } from "./seed";
 import { CartProduct } from "./types";
 import { debug } from "console";
+import cartRouter from "./features/cart/router";
+
 debug("Debug message before server starts");
 
 const app = express();
@@ -23,25 +25,8 @@ async function faker() {
   }
 }
 faker();
-app.post("/api/carts/", async (req, res) => {
-  console.log("line 9");
 
-  const newCart = await db.insert(cart).values({ totalPrice: 0 }).returning();
-  console.log(newCart);
-  res.json(newCart);
-});
-
-app.get("/api/carts/:id/", async (req, res) => {
-  console.log("line 21");
-
-  const newCart = await db
-    .select()
-    .from(cart)
-    .where(eq(cart.cartId, req.params.id))
-    .execute();
-
-  res.json(cart);
-});
+app.use("/api/carts", cartRouter);
 
 app.post("/api/carts/:cartId/products/", async (req, res) => {
   try {
